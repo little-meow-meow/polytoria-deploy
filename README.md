@@ -1,6 +1,11 @@
 # PTDeploy
 Continuous deployment of your project to Polytoria.
 
+<a href="https://ko-fi.com/little_meow_meow"><img src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/670f5a01c01ea9191809398c_support_me_on_kofi_blue.png" height="28px"></a>
+
+> [!IMPORTANT]
+> This project was not written with AI and does not accept AI-generated contributions.
+
 ## Setup
 Create the file `.github/workflows/deploy.yml` in your repo:
 ```yml
