@@ -1,0 +1,3 @@
+[submodule "polytoria-game"]
+	path = polytoria-game
+	url = https://github.com/polytoria/polytoria-game.git
