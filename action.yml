@@ -1,0 +1,39 @@
+name: polytoria-deploy
+description: "Continuous deployment for your Polytoria projects"
+inputs:
+  creator-token:
+    description: "Authentication token used to publish your world. Check the README.md for how to get one."
+    required: true
+    type: string
+  project-path:
+    description: "Path to your project in the action runner's workspace."
+    required: true
+    type: string
+  place-id:
+    description: "ID of the place to publish the project."
+    required: true
+    type: number
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v7
+      with:
+        repository: little-meow-meow/polytoria-deploy
+        path: "./.poly/polytoria-deploy"
+        submodules: 'recursive'
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: 10.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: "./.poly/polytoria-deploy"
+      shell: bash
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: "./.poly/polytoria-deploy"
+      shell: bash
+    - name: Deploy
+      run: dotnet run --project PTDeploy ${{ inputs.creator-token }} ${{ inputs.project-path }} ${{ inputs.place-id }}
+      working-directory: "./.poly/polytoria-deploy"
+      shell: bash
